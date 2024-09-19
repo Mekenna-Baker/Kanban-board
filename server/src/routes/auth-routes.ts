@@ -12,18 +12,19 @@ export const login = async (req: Request, res: Response) => {
     where: { username }, 
 });
 
-if(!user) {
-  return res.sendStatus(404).json({ message: 'Authentication failed. User not found.' });
+if (!user) {
+  return res.status(404).json({ message: 'Authentication failed. User not found.' });
 }
 
 const passwordIsValid = await bcrypt.compare(password, user.password);
+
 if (!passwordIsValid) {
-  return res.sendStatus(401).json({ message: 'Authentication failed. Incorrect password.' });
+  return res.status(401).json({ message: 'Authentication failed. Incorrect password.' });
 }
 
 const secretKey = process.env.JWT_SECRET_KEY || ''; // get secret key from env
 
-const token = jwt.sign({ username }, secretKey, { expiresIn: '1h' }); 
+const token = jwt.sign({ id: user.id, username: user.username }, secretKey, { expiresIn: '1h' }); 
 return res.json({ token }); 
 }; 
 

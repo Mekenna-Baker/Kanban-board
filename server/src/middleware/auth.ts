@@ -12,17 +12,17 @@ export const authenticateToken = (req: Request, res: Response, next: NextFunctio
   if (authHeader) {
     const token = authHeader.split(' ')[1]; // get token from header
 
-    const secretKey = process.env.JWT_SECRET_KE || ''; // get secret key from env
+    const secretKey = process.env.JWT_SECRET_KEY || ''; // get secret key from env
 
-     jwt.verify(token, secretKey, (err, user) => { // verify token
+    jwt.verify(token, secretKey, (err, user) => { // verify token
       if (err) {
-        return res.sendStatus(403); // return 403 if token is invalid
-      }
+        return res.status(403).json({ message: 'Invalid token' });
+    }
 
       req.user = user as JwtPayload; // add user to request object
       return next(); // call next middleware
-  });
-} else {
-    res.sendStatus(401); 
-}
+    });
+  } else {
+    res.sendStatus(401);
+  }
 };
