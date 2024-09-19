@@ -14,7 +14,7 @@ const login = async (userInfo: UserLogin) => {
       const data = await response.json();
   
       if (response.ok) {
-          // Assume 'data.token' is where the server sends the JWT
+          
           localStorage.setItem('token', data.token);
           return data;
       } else {
