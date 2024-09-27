@@ -1,13 +1,13 @@
 import { useState, FormEvent, ChangeEvent } from "react";
-
 import Auth from '../utils/auth';
 import { login } from "../api/authAPI";
 
+
 const Login = () => {
-  const [loginData, setLoginData] = useState<{ username: string; password: string }>({
-    username: '',
-    password: ''
-  });
+const [loginData, setLoginData] = useState<{ username: string; password: string }>({
+  username: '',
+  password: ''
+});
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
