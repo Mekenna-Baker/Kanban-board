@@ -4,7 +4,7 @@ import Auth from '../utils/auth';
 import { login } from "../api/authAPI";
 
 const Login = () => {
-  const [loginData, setLoginData] = useState({
+  const [loginData, setLoginData] = useState<{ username: string; password: string }>({
     username: '',
     password: ''
   });
