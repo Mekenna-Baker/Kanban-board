@@ -1,7 +1,7 @@
 import { Router, Request, Response } from 'express';
 import { User } from '../models/user.js';
 import jwt from 'jsonwebtoken';
-import bcrypt from 'bcrypt';
+import bcryptjs from 'bcryptjs';
 
 export const login = async (req: Request, res: Response) => {
   // TODO: If the user exists and the password is correct, return a JWT token
@@ -16,7 +16,7 @@ if (!user) {
   return res.status(404).json({ message: 'Authentication failed. User not found.' });
 }
 
-const passwordIsValid = await bcrypt.compare(password, user.password);
+const passwordIsValid = await bcryptjs.compare(password, user.password);
 
 if (!passwordIsValid) {
   return res.status(401).json({ message: 'Authentication failed. Incorrect password.' });

@@ -1,10 +1,10 @@
 import { DataTypes, Model } from 'sequelize';
-import bcrypt from 'bcrypt';
+import bcryptjs from 'bcryptjs';
 export class User extends Model {
     // Hash the password before saving the user
     async setPassword(password) {
         const saltRounds = 10;
-        this.password = await bcrypt.hash(password, saltRounds);
+        this.password = await bcryptjs.hash(password, saltRounds);
     }
 }
 export function UserFactory(sequelize) {
