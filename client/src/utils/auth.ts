@@ -22,7 +22,6 @@ class AuthService {
         return true;
       }
     } catch (err) {
-      console.error("Failed to decode token:", err);
       return false; // return false if error
     }
   }
@@ -46,7 +45,7 @@ class AuthService {
     // TODO: remove the token from localStorage
     localStorage.removeItem('id_token'); // remove token from local storage
     // TODO: redirect to the login page
-    window.location.assign('/login'); 
+    window.location.assign('/'); 
   }
 }
 

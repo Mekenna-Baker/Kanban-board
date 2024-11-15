@@ -15,7 +15,7 @@ The kanban board application allows a user(s) to create, update, and track tasks
 
 ## Installation
 
-No installation is necessary, simply follow this link: 
+No installation is necessary, simply follow this link: https://kanban-board-xso3.onrender.com/
 
 ## Usage
 

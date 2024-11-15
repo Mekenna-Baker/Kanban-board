@@ -13,7 +13,7 @@ export const login = async (req: Request, res: Response) => {
 });
 
 if (!user) {
-  return res.status(404).json({ message: 'Authentication failed. User not found.' });
+  return res.status(401).json({ message: 'Authentication failed. User not found.' });
 }
 
 const passwordIsValid = await bcryptjs.compare(password, user.password);
@@ -24,7 +24,7 @@ if (!passwordIsValid) {
 
 const secretKey = process.env.JWT_SECRET_KEY || ''; // get secret key from env
 
-const token = jwt.sign({ id: user.id, username: user.username }, secretKey, { expiresIn: '1h' }); 
+const token = jwt.sign({ username }, secretKey, { expiresIn: '1h' }); 
 return res.json({ token }); 
 }; 
 

@@ -11,26 +11,20 @@ const login = async (userInfo: UserLogin) => {
         body: JSON.stringify(userInfo),
       });
   
-      const data = await response.json();
   
-      if (response.ok) {
-          
-          localStorage.setItem('token', data.token);
-          return data;
-      } else {
-          // Throw an error with the server-provided message or a default message
-          throw new Error(data.message || 'Authentication failed. Check username and password.');
+      if (!response.ok) {
+        const errorData  = await response.json();
+        throw new Error(`Error: ${errorData.message}`);
       }
+
+      const data = await response.json();
+      return data;
+
     } catch (error) {
-      console.error('Login error: ', error);
-      throw error;  // Re-throw to handle this error in UI components or further up the chain
+      console.log('Error from login: ', error)
+      return Promise.reject('Could not fetch user information');
     }
-  };
-  
-  const logout = () => {
-      localStorage.removeItem('token');
-      window.location.href = '/login'; // Redirect to login after logout
-  };
 
+  }
 
-export { login, logout };
+export { login };
